@@ -1,0 +1,16 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\BlueprintController;
+
+Route::middleware('auth:sanctum')->group(function(){
+ 
+Route::get('/blueprints',[BlueprintController::class, 'index']);
+Route::get('/blueprints/{blueprint}',[BlueprintController::class, 'show']);
+
+
+
+
+
+});
