@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBlueprintRequest;
+use App\Http\Resources\BlueprintResource;
 use App\Models\Blueprint;
-use Illuminate\Http\Request;
 
 class BlueprintController extends Controller
 {
@@ -12,11 +13,20 @@ class BlueprintController extends Controller
     {
         $blueprints = auth()->user()->blueprints()->latest()->get();
 
-        return response()->json($blueprints);
+        return BlueprintResource::collection($blueprints);
+    }
+
+    public function store(StoreBlueprintRequest $request)
+    {
+        $blueprint = auth()->user()->blueprints()->create($request->validated());
+
+        return (new BlueprintResource($blueprint))
+            ->response()
+            ->setStatusCode(201);
     }
 
     public function show(Blueprint $blueprint)
     {
-        return response()->json($blueprint);
+        return new BlueprintResource($blueprint);
     }
 }
