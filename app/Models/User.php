@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Blueprint;
+use App\Models\RawContent;
 
 class User extends Authenticatable
 {
@@ -41,10 +42,14 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\GeneratedPost::class);
     }
     
-        public function blueprints()
+    public function blueprints()
     {
         return $this->hasMany(Blueprint::class);
     }
 
+    public function rawContents()
+    {
+        return $this->hasMany(\App\Models\RawContent::class);
+    }
     
 }

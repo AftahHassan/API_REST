@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blueprint extends Model
+class RawContent extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'name',
-        'style_rules',
-        'tone',
-        'max_characters',
-        'max_hashtags',
+        'blueprint_id',
+        'contenu_brut',
+        'statut',
     ];
 
     public function user()
@@ -23,8 +21,8 @@ class Blueprint extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function rawContents()
+    public function blueprint()
     {
-        return $this->hasMany(RawContent::class);
+        return $this->belongsTo(Blueprint::class);
     }
 }
