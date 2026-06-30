@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+     public function up(): void
     {
         Schema::create('raw_contents', function (Blueprint $table) {
             $table->id();
@@ -15,26 +15,23 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->foreignId('campaign_id')
+            $table->foreignId('blueprint_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->longText('content');
+            $table->longText('contenu_brut');
 
-            $table->string('source_type')->default('note');
-
-            $table->enum('processing_status', [
-                'pending',
-                'processing',
-                'completed',
-                'failed'
-            ])->default('pending');
-
-            $table->text('error_message')->nullable();
+            $table->enum('statut', [
+                'en_attente',
+                'traitement',
+                'traite',
+                'echec',
+            ])->default('en_attente');
 
             $table->timestamps();
         });
     }
+    
 
     public function down(): void
     {
