@@ -25,4 +25,8 @@ class RawContent extends Model
     {
         return $this->belongsTo(Blueprint::class);
     }
+    public function generatedPost()
+    {
+        return $this->hasOne(\App\Models\GeneratedPost::class);
+    }
 }
